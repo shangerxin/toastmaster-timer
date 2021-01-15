@@ -53,7 +53,7 @@ function resetTimerState(page) {
 
     timerData.totalPassedSeconds++;
     updateDisplayTimerInfo(page);
-    timerData.timerHandler = setTimeout(countHandler, 1000);
+    timerData.timerHandleID = setTimeout(countHandler, 1000);
   };
 
   if (timerData.isCountDown) {
@@ -81,11 +81,11 @@ Page({
   data: {
     isCountDown: true,
     isEditingTimer: false,
-    isPaused: false,
     imagePath: imagePaths.none,
     hours: 0,
     minutes: 0,
     seconds: 0,
+    targetSeconds: 0,
 
     //type 0:2 green, 1 yellow, 0 red, overtime 30s bell
     //type 1:1 green, 30s yellow, 0 red, overtime 30s bell
@@ -162,9 +162,7 @@ Page({
 
 
   onStart: function () {
-    if(timerData.timerHandler){
-      timerData.timerHandleID = setTimeout(timerData.timerHandler, 1000);
-    }
+    timerData.timerHandleID = setTimeout(timerData.timerHandler, 1000);
   },
 
   onReset: function () {
@@ -187,7 +185,13 @@ Page({
 
   onChangeTimerType: function(e){
       timerData.isCountDown = e.detail.value;
+      this.setData({
+        targetSeconds:timerData.targetSeconds
+      });
       resetTimerState(this);
       updateDisplayTimerInfo(this);
+      if(timerData.timerHandleID){
+        clearTimeout(timerData.timerHandleID);
+      }
   }
 });

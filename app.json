@@ -1,15 +1,22 @@
 {
-  "pages": [
-    "pages/index",
-    "pages/report"
-  ],
-  "window":{"navigationBarTitleText": "头马计时器"},
-  "tabBar": {
-    "list":[
-      {"pagePath": "pages/index",
-       "text":"计时器"},
-       {"pagePath": "pages/report",
-      "text":"报表"}
-    ]
-  }
+    "pages": [
+        "pages/index",
+        "pages/report"
+    ],
+    "window": {
+        "navigationBarTitleText": "头马计时器"
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/index",
+                "text": "计时器"
+            },
+            {
+                "pagePath": "pages/report",
+                "text": "报表"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
 }

@@ -4,6 +4,7 @@
 <text>Toastmaster timer:</text>
 
 <view class="page-body">
+  <text>{{targetSeconds}}</text>
   <view class="page-section-timer">
     <view wx:if="{{!isEditingTimer}}" class="page-section-timer-display">
       <text>{{hours}}</text>
