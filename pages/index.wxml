@@ -1,0 +1,59 @@
+<!--pages/index.wxml-->
+
+<script src="jQuery.js"></script>
+<text>Toastmaster timer:</text>
+
+<view class="page-body">
+  <view class="page-section-timer">
+    <view wx:if="{{!isEditingTimer}}" class="page-section-timer-display">
+      <text>{{hours}}</text>
+      <text>:</text>
+      <text>{{minutes}}</text>
+      <text>:</text>
+      <text>{{seconds}}</text>
+    </view>
+   <view wx:if="{{isEditingTimer}}" class="page-section-timer-setting">
+     <timeslot-component model:value="{{hours}}" />
+     <text>:</text>
+     <timeslot-component model:value="{{minutes}}" />
+     <text>:</text>
+     <timeslot-component model:value="{{seconds}}" />
+   </view>
+  </view>
+
+  <view class="page-section-timer-buttons">
+    <button bindtap="onUpdateTimer">update</button>
+    <button bindtap="onStart">start</button>
+    <button bindtap="onReset">reset</button>
+    <button bindtap="onStop">stop</button>
+    <button bindtap="onRecord">record</button>
+  </view>
+
+  <view class="page-section-timer-setting">
+
+    <lable>count down:<switch checked="{{isCountDown}}" bindchange="onChangeTimerType"/></lable>
+
+    <radio-group>
+      <view><lable>2m green, 1m yellow, over 30s:<radio value="0" model:checked="{{!timerType}}"></radio></lable></view>
+
+      <lable>1m green, 30s yellow, over 30s:<radio value="1" model:checked="{{timerType}}"></radio></lable>
+    </radio-group>
+  </view>
+  <view>
+    <image model:src="{{imagePath}}"/>
+  </view>
+</view>
+
+
+<template name="record-item">
+</template>
+
+<template name="item-green-card">
+</template>
+
+<template name="item-yellow-card">
+</template>
+
+<template name="item-red-card">
+</template>
+

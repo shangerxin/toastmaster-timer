@@ -1,0 +1,1 @@
+<input model:value="{{value}}" type="digit" />

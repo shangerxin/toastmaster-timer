@@ -1,0 +1,25 @@
+{
+  "name": "toastmaster-timer",
+  "version": "1.0.0",
+  "description": "a weichat timer project for helping statistic the consumed time slot for each lectures in a toastmaster event",
+  "main": "main.js",
+  "dependencies": {
+    "miniprogram-automator": "^0.10.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "keywords": [
+    "timer",
+    "toatmaster"
+  ],
+  "author": "Edwin (Erxin)",
+  "license": "MIT"
+}

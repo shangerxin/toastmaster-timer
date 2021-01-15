@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "timeslot-component": "/components/timeslot-component"
+  }
+}
