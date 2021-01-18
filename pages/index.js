@@ -10,13 +10,13 @@ var imagePaths = {
 
 var timerData = {
   get hours() {
-    return this.isCountDown? Math.floor(this.totalPassedSeconds / 3600):0;
+    return Math.floor(this.totalPassedSeconds / 3600);
   },
   get minutes() {
-    return this.isCountDown? Math.floor((this.totalPassedSeconds % 3600) / 60):0;
+    return Math.floor((this.totalPassedSeconds % 3600) / 60);
   },
   get seconds() {
-    return this.isCountDown? this.totalPassedSeconds % 60:0;
+    return this.totalPassedSeconds % 60;
   },
   totalPassedSeconds: 0,
   startTime: 0,
@@ -47,10 +47,10 @@ function resetTimerState(page) {
   };
 
   var countHandler = function () {
-    if (timerData.totalPassedSeconds >= timerData.targetSeconds) {
+    if (timerData.totalPassedSeconds >= timerData.targetSeconds 
+        || timerData.targetSeconds == 0){
       return;
     }
-
     timerData.totalPassedSeconds++;
     updateDisplayTimerInfo(page);
     timerData.timerHandleID = setTimeout(countHandler, 1000);
@@ -71,6 +71,13 @@ function updateDisplayTimerInfo(page) {
     minutes: timerData.minutes,
     seconds: timerData.seconds
   });
+}
+
+function stopTimeout(){
+  if(timerData.timerHandleID){
+    clearTimeout(timerData.timerHandleID);
+    timerData.timerHandleID = null;
+  }
 }
 
 Page({
@@ -162,36 +169,28 @@ Page({
 
 
   onStart: function () {
-    timerData.timerHandleID = setTimeout(timerData.timerHandler, 1000);
+    if(!timerData.timerHandleID){
+      timerData.timerHandleID = setTimeout(timerData.timerHandler, 1000);
+    }
   },
 
   onReset: function () {
-    if (timerData.timerHandleID) {
-      clearTimeout(timerData.timerHandleID);
-      resetTimerState(this);
-      updateDisplayTimerInfo(this);
-    }
+    stopTimeout();
+    resetTimerState(this);
+    updateDisplayTimerInfo(this);
   },
 
   onStop: function () {
-    if (timerData.timerHandleID) {
-      clearTimeout(timerData.timerHandleID);
-    }
+    stopTimeout();
   },
 
   onRecord: function () {
-
   },
 
   onChangeTimerType: function(e){
-      timerData.isCountDown = e.detail.value;
-      this.setData({
-        targetSeconds:timerData.targetSeconds
-      });
-      resetTimerState(this);
-      updateDisplayTimerInfo(this);
-      if(timerData.timerHandleID){
-        clearTimeout(timerData.timerHandleID);
-      }
+    stopTimeout();
+    timerData.isCountDown = e.detail.value;
+    resetTimerState(this);
+    updateDisplayTimerInfo(this);
   }
 });
