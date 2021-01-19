@@ -103,7 +103,6 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    var report = wx.getStorageSync('report');
     var timerData = wx.getStorageSync('timerData');
     if (timerData) {
       timerData = timerData;
@@ -135,7 +134,7 @@ Page({
    * Lifecycle function--Called when page unload
    */
   onUnload: function () {
-    wx.setStorageSync('timerData', timerData)
+    wx.setStorageSync('timerData', timerData);
   },
 
   /**
@@ -184,7 +183,13 @@ Page({
     stopTimeout();
   },
 
-  onRecord: function () {
+  onAppendRecord: function () {
+    var app = getApp();
+    app.reports.push({    
+      hours: timerData.hours,
+      minutes: timerData.minutes,
+      seconds: timerData.seconds
+    });
   },
 
   onChangeTimerType: function(e){

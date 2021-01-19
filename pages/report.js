@@ -5,14 +5,19 @@ Page({
    * Page initial data
    */
   data: {
-
+    reports: []
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    var reports = wx.getStorageSync('reports');
+    if (reports) {
+      this.setData({
+        reports: app.reports
+      });
+    }
   },
 
   /**
@@ -26,7 +31,12 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    var app = getApp();
+    if (app.reports.length > 0) {
+      this.setData({
+        reports: app.reports
+      });
+    }
   },
 
   /**
@@ -40,7 +50,7 @@ Page({
    * Lifecycle function--Called when page unload
    */
   onUnload: function () {
-
+    wx.setStorageSync('reports', this.data.reports);
   },
 
   /**
@@ -62,5 +72,23 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onDelete: function (e) {
+    var index = e.currentTarget.dataset.index;
+    if (index > 0) {
+     this.data.reports.splice(index - 1, 1);
+      this.setData({
+        reports: this.data.reports
+      });
+    }
+  },
+
+  onReset: function () {
+    var app = getApp();
+    app.reports.splice(0, app.reports.length); 
+    this.setData({
+      reports: app.reports
+    });
   }
 })

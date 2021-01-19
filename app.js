@@ -5,5 +5,7 @@ App({
   onShow: function(options) {},
   onHide: function() {},
   onError: function(msg) {},
-  globalData: 'Edwin Shang'
+  editor: null,
+  author: 'Edwin(Erxin) Shang',
+  reports: []
 })

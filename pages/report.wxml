@@ -1,2 +1,14 @@
 <!--pages/report.wxml-->
-<text>pages/report.wxml</text>
+<text>Timer reports</text>
+<button bindtap="onReset">Reset</button>
+<view wx:for="{{reports }}" wx:key="this">
+  <view>
+    <text>{{index+1}}\t</text>
+    <text>{{item.hours}}</text>
+    <text>:</text>
+    <text>{{item.minutes}}</text>
+    <text>:</text>
+    <text>{{item.seconds}}</text>
+    <button data-index="{{index+1}}" bindtap="onDelete">delete</button>
+  </view>
+</view>

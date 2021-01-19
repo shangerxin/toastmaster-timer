@@ -26,7 +26,7 @@
     <button bindtap="onStart">start</button>
     <button bindtap="onReset">reset</button>
     <button bindtap="onStop">stop</button>
-    <button bindtap="onRecord">record</button>
+    <button bindtap="onAppendRecord">record</button>
   </view>
 
   <view class="page-section-timer-setting">
@@ -43,10 +43,6 @@
     <image model:src="{{imagePath}}"/>
   </view>
 </view>
-
-
-<template name="record-item">
-</template>
 
 <template name="item-green-card">
 </template>
